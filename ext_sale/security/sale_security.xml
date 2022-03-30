@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_ext_sale">
+        <field name="name">Extension Sale</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="group_ext_sale_manager" model="res.groups">
+         <field name="name">Ban giám đốc</field>
+         <field name="category_id" ref="ext_sale.module_category_ext_sale"/>
+    </record>
+
+    <record id="group_ext_sale_sale_manager" model="res.groups">
+         <field name="name">Trưởng phòng kinh doanh</field>
+         <field name="category_id" ref="ext_sale.module_category_ext_sale"/>
+    </record>
+
+    <record id="group_ext_sale_sale" model="res.groups">
+        <field name="name">Nhân viên kinh doanh</field>
+        <field name="category_id" ref="ext_sale.module_category_ext_sale"/>
+    </record>
+
+    <record id="group_ext_sale_ei_manager" model="res.groups">
+         <field name="name">Trưởng phòng xuất nhập khẩu</field>
+         <field name="category_id" ref="ext_sale.module_category_ext_sale"/>
+    </record>
+
+    <record id="group_ext_sale_ei_executive" model="res.groups">
+        <field name="name">Nhân viên xuất nhập khẩu</field>
+        <field name="category_id" ref="ext_sale.module_category_ext_sale"/>
+    </record>
+</odoo>

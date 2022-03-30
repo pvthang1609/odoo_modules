@@ -1,0 +1,8 @@
+.sticky_col {
+    /* Background color */
+    background-color:  rgb(240 253 244) !important;
+    /* Stick to the left */
+    position: sticky !important;
+    /* Displayed on top of other rows when scrolling */
+    z-index: 10 !important;
+}

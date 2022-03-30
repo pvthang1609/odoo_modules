@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_order_line_approve" model="ir.ui.view">
+        <field name="name">view.sale.order.line.approve</field>
+        <field name="model">sale.order.line.approve.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Phân công cho NV XNK">
+                <group>
+                    <group>
+                        <field name="ei_executive_ids" widget="many2many_tags"/>
+                    </group>
+                    <group/>
+                </group>
+                <p>
+                    Hành động này sẽ phân công cho tất cả các mục sản phẩm hỏi hàng?
+                </p>
+                <footer>
+                    <button string="Xác nhận" name="multi_update" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Hủy" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_order_line_approve" model="ir.actions.act_window">
+        <field name="name">Phân công cho NVXNK</field>
+        <field name="res_model">sale.order.line.approve.wizard</field>
+        <field name="binding_model_id" ref="sale.model_sale_order_line"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_sale_order_line_approve"/>
+    </record>
+
+</odoo>

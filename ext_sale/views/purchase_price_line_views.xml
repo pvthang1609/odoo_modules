@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="price_line_action" model="ir.actions.act_window">
+        <field name="name">Danh sách giá</field>
+        <field name="res_model">sale.order.price.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="price_line_form" model="ir.ui.view">
+        <field name="name">Báo giá của nhà cung cấp</field>
+        <field name="model">sale.order.price.line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="common_name" />
+                    </group>
+                    <group>
+                        <field name="product_id" />
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="partner_id"/>
+                    </group>
+                    <group>
+                        <field name="delivery_time_partner"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="unit_currency" />
+                        <field name="price" />
+                        <field name="other_costs" />
+
+                    </group>
+                    <group>
+                        <field name="exchange_rate" />
+                        <field name="subtotal" />
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="product_origin" />
+                        <field name="manufacturer" />
+                    </group>
+                    <group>
+                        <field name="min_quantity" />
+                        <field name="attachments" string="File đính kèm"/>
+                    </group>
+                </group>
+                <label for="description"/>
+                <field name="description"  placeholder="Mô tả sản phẩm từ nhà sản xuất"/>
+                <label for="payment_term"/>
+                <field name="payment_term" placeholder="Điều kiện thanh toán từ nhà sản xuất"/>
+                <label for="delivery_term"/>
+                <field name="delivery_term" placeholder="Điều kiện giao hàng từ nhà sản xuất"/>
+                <label for="note"/>
+                <field name="note" placeholder="Ghi chú"/>
+                <div class="d-flex justify-content-end">
+                    <field name="write_date"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="price_line_list" model="ir.ui.view">
+        <field name="name">Price Line List</field>
+        <field name="model">sale.order.price.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree decoration-warning="is_proposed == True">
+                <field name="common_name" />
+                <field name="product_id"/>
+                <field name="partner_id"/>
+                <field name="partner_rate" widget="rate_readonly"/>
+                <field name="min_quantity"/>
+                <field name="subtotal" string="Đơn giá"/>
+                <field name="ei_executive_id"/>
+                <field name="unit_currency" optional="hide"/>
+                <field name="price" optional="hide"/>
+                <field name="exchange_rate" optional="hide"/>
+                <field name="product_origin"/>
+                <field name="manufacturer"/>
+                <field name="description"/>
+                <field name="payment_term"/>
+                <field name="delivery_term"/>
+                <field name="note"/>
+                <field name="attachments" optional="hide"/>
+                <field name="state" decoration-success="state == 'selected'"/>
+                <field name="is_proposed"  invisible="1"/>
+
+                <button name="action_propose" title="Đề xuất nhà cung cấp này" type="object" icon="fa-square-o" attrs="{'invisible': [('is_proposed', '=', True)]}"/>
+                <button name="action_propose" title="Bỏ đề xuất nhà cung cấp này" type="object" icon="fa-check-square-o" attrs="{'invisible': [('is_proposed', '=', False)]}"/>
+
+                <button name="action_confirm_price" title="Lựa chọn nhà cung cấp này" type="object" icon="fa-check-circle" confirm="Bạn có chắc chắn chọn nhà cung cấp này không?"
+                    attrs="{'invisible': [('state', '=', 'selected')]}"/>
+                <button name="action_restore_confirmed" title="Bỏ lựa chọn nhà cung cấp này" type="object" icon="fa-times-circle" attrs="{'invisible': [('state', '=', 'not_select')]}"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

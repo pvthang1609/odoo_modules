@@ -1,0 +1,20 @@
+.chart_container {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 2rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-item: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.canvas_bg {
+    width: 40vw;
+    padding: 2rem
+}
+
+.canvas_bg_doughnut {
+    width: 35vw;
+    padding: 2rem
+}

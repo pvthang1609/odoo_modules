@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="chart_menu" name="Chart JS"/>
+    <menuitem id="chart_menu_sub" name="Biểu đồ"
+              parent="chart_menu" action="chart_actions"/>
+</odoo>

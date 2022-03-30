@@ -1,0 +1,183 @@
+body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+/* [START] BASE-TABLE */
+.cus-table {
+    margin: 10px 10px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid #E9E9E9;
+    width: auto !important;
+    overflow-x: auto;
+    height: initial;
+}
+.cus-table.shadow {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.table thead tr {
+    background-color: #F6F4FF;
+    color: #344771;
+    text-align: left;
+}
+.table th,
+.table td {
+    padding: 12px 12px;
+}
+.table tbody tr {
+    border-bottom: 2px solid #E9E9E9;
+}
+.table tbody tr:nth-of-type(even) {
+    background-color: #fafafa;
+}
+.table tbody tr:last-of-type {
+    border-bottom: 1px solid #E9E9E9;
+}
+.table tbody tr.active-row {
+    font-weight: bold;
+    color: #344771;
+}
+.table thead > tr > th:nth-child(4) {
+    width: 150px;
+    text-align: center;
+}
+.table tfoot {
+    background-color: #ffffff !important
+}
+.clearfix.position-relative.o_form_sheet {
+    border-radius: 5px !important;
+}
+.o_list_view .o_list_table thead > tr > th {
+    border: none;
+}
+.o_list_view .o_list_table thead > tr > th:not(.o_list_record_selector) {
+    border: none;
+}
+th:not(:first-child) {
+    border-left: 1px solid #E9E9E9 !important;
+}
+td.o_list_record_remove {
+    text-overflow: clip !important;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff;
+}
+.o_badge_cell {
+    text-overflow: clip !important;
+}
+.o_list_view .table-responsive .o_list_table thead tr:nth-child(1) th {
+    background-color: initial;
+}
+.o_list_view .o_optional_columns_dropdown_toggle {
+    padding: 7px
+;
+}
+/* [END] BASE-TABLE */
+/* ========================================= */
+/* [START] BASE-BUTTON */
+.btn {
+    padding-top: 4.5px !important;
+    padding-bottom: 4.5px !important;
+    border-radius: 5px;
+}
+.btn ~ .btn {
+    margin-left: 3px;
+}
+.o_MessageReactionGroup {
+    border: none;
+    border-radius: 5px !important;
+}
+/* [END] BASE-BUTTON */
+/* ========================================= */
+/* [START] BASE-FORM */
+select.o_field_widget.o_input {
+    padding: 6px !important;
+}
+.o_input {
+    padding: 5px 5px;
+}
+.o_form_view .o_group .o_td_label, .o_form_view .o_group .o_checkbox_optional_field > .o_form_label {
+    border-right: none;
+}
+/* [END] BASE-FORM */
+/* ========================================= */
+/* [START] BASE-SEARCH */
+.o_searchview .o_searchview_icon {
+    right: 10px;
+}
+.o_searchview {
+    border-radius: 5px;
+    padding: 5px 30px 7px 8px;
+}
+.o_searchview .o_searchview_input_container .o_searchview_autocomplete {
+    left: 0;
+    border-radius: 5px;
+}
+.o_searchview .o_searchview_input_container {
+    position: static;
+}
+.o_cp_searchview {
+    position: relative;
+}
+.o_searchview .o_searchview_icon {
+    top: 10px;
+}
+.o_searchview_facet {
+    border-radius: 5px;
+    overflow: hidden;
+    border: none !important;
+}
+/* [END] BASE-SEARCH */
+/* ========================================= */
+/* [START] BASE-HEADER-ACTIONS */
+.o_form_view .o_form_statusbar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #f6f4ff;
+}
+/* [END] BASE-HEADER-ACTIONS */
+/* ========================================= */
+/* [START] BASE-BADGE */
+.badge-pill {
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+}
+.o_notification_counter.badge.badge-pill {
+    height: 15px;
+    width: 15px;
+    font-size: 8px;
+    border-radius: 50%;
+    background-color: #DB4976;
+}
+/* [END] BASE-BADGE */
+/* ========================================= */
+/* [START] BASE-USER-AVATAR */
+.o_user_menu .o_user_avatar {
+    height: 30px;
+    width: 30px;
+    transform: translateY(0px);
+    margin-right: 5px;
+}
+/* [END] BASE-USER-AVATAR */
+/* ========================================= */
+.cus-sheet {
+    max-width: initial !important;
+    margin: 12px !important;
+}
+/* [START] BASE-HIDDEN-MENU-USER */
+span[data-menu="account"],
+a[data-menu="documentation"],
+a[data-menu="support"]{
+    display: none;
+}
+
+button[data-original-title="Printing options"] > i,
+button[data-original-title="Additional actions"] > i {
+    margin-right: 0.5rem !important
+}
+
+.o_field_widget.o_field_many2manytags {
+    column-gap: 5px;
+}

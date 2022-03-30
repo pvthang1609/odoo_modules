@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="chart_view">
+        <field name="model">res.partner</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <chart>
+                 <field name="sale.order" by="state" unit=""/>
+            </chart>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="chart_actions">
+        <field name="name">Chart - Biểu đồ giá trị đơn bán hàng</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">chart</field>
+        <field name="view_id" ref="chart_view"/>
+    </record>
+</odoo>
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+     <t t-extend="FormView.buttons">
+        <t t-jquery="button.o_form_button_edit" t-operation="replace">
+            <button t-if="widget.is_action_enabled('edit')" type="button"
+                    class="btn btn-primary o_form_button_edit" title="Edit record" accesskey="a">
+                 <i class="fa fa-pencil mr-2"></i>
+                 <span>Edit</span>
+            </button>
+        </t>
+         <t t-jquery="button.o_form_button_create" t-operation="replace">
+             <button t-if="widget.is_action_enabled('create')" type="button"
+                    class="btn btn-secondary o_form_button_create" title="Create record" accesskey="c">
+                 <i class="fa fa-plus mr-2"></i>
+                 <span>Create</span>
+            </button>
+        </t>
+         <t t-jquery="button.o_form_button_save" t-operation="replace">
+             <button type="button"
+                class="btn btn-primary o_form_button_save" title="Save record" accesskey="s">
+                <i class="fa fa-floppy-o mr-2"></i>
+                <span>Save</span>
+            </button>
+        </t>
+         <t t-jquery="button.o_form_button_cancel" t-operation="replace">
+             <button type="button"
+                class="btn btn-secondary o_form_button_cancel" title="Discard record" accesskey="j">
+                <i class="fa fa-times mr-2"></i>
+                <span>Discard</span>
+            </button>
+        </t>
+     </t>
+
+    <t t-extend="ListView.buttons">
+        <t t-jquery="button.o_list_button_save" t-operation="replace">
+            <button type="button" class="btn btn-primary o_list_button_save" title="Lưu bản ghi" accesskey="s">
+                <i class="fa fa-floppy-o mr-2"></i>
+                <span>Save</span>
+            </button>
+        </t>
+        <t t-jquery="button.o_list_button_discard" t-operation="replace">
+            <button type="button" class="btn btn-secondary o_list_button_discard" title="Hủy bản ghi" accesskey="j">
+                <i class="fa fa-times mr-2"></i>
+                <span>Discard</span>
+            </button>
+        </t>
+        <t t-jquery="button.o_list_button_add" t-operation="replace">
+            <button type="button" class="btn btn-primary o_list_button_add" title="Tạo bản ghi" accesskey="c">
+                <i class="fa fa-plus mr-2"></i>
+                <span>Create</span>
+            </button>
+        </t>
+        <t t-jquery="button.o_list_export_xlsx" t-operation="replace">
+            <button type="button" class="btn btn-secondary o_list_export_xlsx d-none" title="Xuất excel tất cả" aria-label="Export All">
+                <i class="fa fa-file-excel-o mr-2"></i>
+                <span>Xuất file</span>
+            </button>
+        </t>
+    </t>
+</templates>

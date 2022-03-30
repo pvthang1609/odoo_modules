@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.DropdownMenuItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//a[@t-else=''][hasclass('dropdown-item')]" position="replace">
+            <a t-else="" class="dropdown-item"
+            t-att-class="{
+                selected: props.isActive,
+                [props.className]: props.className,
+                'd-flex': props.removable,
+                'align-items-center': props.removable,
+                'justify-content-between': props.removable
+            }"
+            t-att-aria-checked="props.isActive ? 'true' : 'false'"
+            role="menuitemcheckbox"
+            t-att-href="props.url or '#'"
+            t-on-click.prevent="trigger('item-selected', { item: props })"
+            >
+            <i t-if="props.icon"
+               class="fa mr-3"
+               t-att-class="{
+                    [props.icon]: props.icon,
+               }"/>
+            <t t-esc="props.description"/>
+            <i t-if="props.removable"
+                class="o_icon_right fa fa-trash btn btn-link text-danger p-0 mr-n3"
+                title="Delete item"
+                t-on-click.stop.prevent="trigger('remove-item', { item: props })"
+            />
+        </a>
+        </xpath>
+    </t>
+</templates>

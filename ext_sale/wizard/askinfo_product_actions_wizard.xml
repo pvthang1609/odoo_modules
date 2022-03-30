@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_askinfo_product_actions" model="ir.ui.view">
+        <field name="name">Thực hiện hành động với các sản phẩm hỏi hàng</field>
+        <field name="model">askinfo.product.actions.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Thực hiện hành động với các sản phẩm hỏi hàng">
+                <group class="mb-4">
+                    <field name="action_type"/>
+                    <field name="user_ids" string="NV XNK được phân công" widget="many2many_tags" attrs="{'invisible': [('action_type', '!=', 'assign')]}"/>
+                    <field name="partner_ids" string="Nhà cung cấp" widget="many2many_tags" attrs="{'invisible': [('action_type', '!=', 'create_askinfo_product_line')]}"/>
+                    <field name="content" string="Lý do từ chối sản phẩm hỏi hàng" placeholder="Ghi rõ thông tin bị thiếu hoặc sai" attrs="{'invisible': [('action_type', '!=', 'reject_draft')]}"/>
+                </group>
+                <!--HELP-->
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'create_askinfo_product_line')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Phần mềm sẽ tạo các thông tin hỏi hàng đến các nhà cung cấp được chọn.</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'send_sale_manager')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Nhân viên kinh doanh trình các sản phẩm nháp cho trưởng phòng kinh doanh kiểm tra thông tin.</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'approve')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Trưởng phòng kinh doanh kiểm tra, xác nhận thông tin và đề xuất phân công nhân viên xuất nhập khẩu.</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'reject_draft')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Sản phẩm sẽ không được duyệt, đưa ra lý do đề nghị nhân viên kinh doanh bổ sung hoặc sửa lại thông tin.</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'assign')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Trưởng phòng xuất nhập khẩu sẽ kiểm tra, phân công lại theo tình hình công việc thực tế và xác nhận phân công</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'fill_local_price')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Trưởng phòng xuất nhập khẩu sẽ lựa chọn giá từ các thông tin hỏi hàng NCC từ các NV XNK và nhập giá bán nội bộ</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'confirm_local_price')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Trưởng phòng kinh doanh sẽ xác nhận giá bán nội bộ, sau đó NV KD mới có thể nhìn thấy</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'fill_price')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Dựa vào giá bán nội bộ được cung cấp, nhân viên tính toán đưa ra giá bán (KH)</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'confirm_fill_price')]}">
+                    <span>Trợ giúp: </span>
+                    <span>TP KD xác nhận giá bán (KH) từ nhân viên kinh doanh</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'confirm')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Ban giám đốc duyệt báo giá</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'send_customer')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Sau khi NV KD gửi báo giá cho khách hàng sẽ xác nhận để phân biệt với những báo giá chưa gửi</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'customer_cancel')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Khách hàng hủy đơn hàng.</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'customer_reject')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Khách hàng từ chối báo giá đã gửi.</span>
+                </p>
+                <p class="font-italic" attrs="{'invisible': [('action_type', '!=', 'fill_price_target')]}">
+                    <span>Trợ giúp: </span>
+                    <span>Khách hàng đồng ý báo giá đã gửi, nhân viên KD nhập giá mục tiêu</span>
+                </p>
+                <!--NOTIFI-->
+                <p class="text-danger" attrs="{'invisible': [('action_type', '=', 'create_askinfo_product_line')]}">
+                    Hành động này sẽ áp dụng lên tất cả các bản ghi, hãy đảm bảo các sản phẩm hỏi hàng đã chọn ở cùng trạng thái phù hợp?
+                </p>
+                <p class="text-danger" attrs="{'invisible': [('action_type', '!=', 'create_askinfo_product_line')]}">
+                    Sẽ có lỗi nếu trong số sản phẩm đã chọn có sản phẩm đã được tạo thông tin hỏi hàng đến nhà cung cấp trước đó. Vui lòng kiểm tra lại và xác nhận.
+                </p>
+
+                <footer>
+                    <button string="Xác nhận" name="action_handle" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Hủy" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_askinfo_product_actions" model="ir.actions.act_window">
+        <field name="name">Thực hiện hành động</field>
+        <field name="res_model">askinfo.product.actions.wizard</field>
+        <field name="binding_model_id" ref="ext_sale.model_askinfo_product"/>
+<!--        <field name="binding_view_types">list</field>-->
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_askinfo_product_actions"/>
+    </record>
+</odoo>

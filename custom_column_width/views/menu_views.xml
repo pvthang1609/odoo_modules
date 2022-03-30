@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="chart_menu" name="Custom column width"/>
+    <menuitem id="chart_menu_sub" name="Table"
+              parent="chart_menu" action="test_actions"/>
+</odoo>
