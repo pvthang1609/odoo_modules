@@ -1,8 +1,137 @@
 /** @odoo-module alias=inherit.EditableListRenderer **/
 
 import ListRenderer from "web.ListRenderer";
+import config from "web.config";
+import field_utils from "web.field_utils";
+import dom from "web.dom";
+
+var FIELD_CLASSES = {
+  char: "o_list_char",
+  float: "o_list_number",
+  integer: "o_list_number",
+  monetary: "o_list_number",
+  text: "o_list_text",
+  many2one: "o_list_many2one",
+};
 
 ListRenderer.include({
+  on_attach_callback: function () {
+    this._super();
+    this._calcPositionColumn()
+  },
+  _calcPositionColumn: function () {
+    const stickyElements = $(".sticky_col");
+    const getPrevElement = (node, offsetWidth = 0) => {
+      const prevElement = node.previousSibling
+      if(!prevElement) {
+        return offsetWidth
+      }
+      else {
+        return getPrevElement(prevElement, offsetWidth + prevElement.offsetWidth)
+      }
+    }
+     for (let i = 0; i < stickyElements.length; i++) {
+       stickyElements[i].style.left = getPrevElement(stickyElements[i]) + 'px'
+     }
+  },
+  _renderSelector: function (tag, disableInput) {
+    var $content = dom.renderCheckbox();
+    if (disableInput) {
+      $content.find("input[type='checkbox']").prop("disabled", disableInput);
+    }
+    return $("<" + tag + ">")
+      .addClass("o_list_record_selector sticky_col")
+      .append($content)
+  },
+  _renderBodyCell: function (record, node, colIndex, options) {
+    var tdClassName = "o_data_cell";
+    if (node.tag === "button_group") {
+      tdClassName += " o_list_button";
+    } else if (node.tag === "field") {
+      tdClassName += " o_field_cell";
+      var typeClass = FIELD_CLASSES[this.state.fields[node.attrs.name].type];
+      if (typeClass) {
+        tdClassName += " " + typeClass;
+      }
+      if (node.attrs.widget) {
+        tdClassName += " o_" + node.attrs.widget + "_cell";
+      }
+    }
+    if (node.attrs.editOnly) {
+      tdClassName += " oe_edit_only";
+    }
+    if (node.attrs.readOnly) {
+      tdClassName += " oe_read_only";
+    }
+    if (node.attrs.sticky) {
+      tdClassName += " sticky_col";
+    }
+    var $td = $("<td>", { class: tdClassName, tabindex: -1 });
+
+    // We register modifiers on the <td> element so that it gets the correct
+    // modifiers classes (for styling)
+    var modifiers = this._registerModifiers(
+      node,
+      record,
+      $td,
+      _.pick(options, "mode")
+    );
+    // If the invisible modifiers is true, the <td> element is left empty.
+    // Indeed, if the modifiers was to change the whole cell would be
+    // rerendered anyway.
+    if (modifiers.invisible && !(options && options.renderInvisible)) {
+      return $td;
+    }
+
+    if (node.tag === "button_group") {
+      for (const buttonNode of node.children) {
+        if (!this.columnInvisibleFields[buttonNode.attrs.name]) {
+          $td.append(this._renderButton(record, buttonNode));
+        }
+      }
+      return $td;
+    } else if (node.tag === "widget") {
+      return $td.append(this._renderWidget(record, node));
+    }
+    if (node.attrs.widget || (options && options.renderWidgets)) {
+      var $el = this._renderFieldWidget(node, record, _.pick(options, "mode"));
+      return $td.append($el);
+    }
+    this._handleAttributes($td, node);
+    this._setDecorationClasses(
+      $td,
+      this.fieldDecorations[node.attrs.name],
+      record
+    );
+
+    var name = node.attrs.name;
+    var field = this.state.fields[name];
+    var value = record.data[name];
+    var formatter = field_utils.format[field.type];
+    var formatOptions = {
+      escape: true,
+      data: record.data,
+      isPassword: "password" in node.attrs,
+      digits: node.attrs.digits && JSON.parse(node.attrs.digits),
+    };
+    var formattedValue = formatter(value, field, formatOptions);
+    var title = "";
+    if (field.type !== "boolean") {
+      title = formatter(
+        value,
+        field,
+        _.extend(formatOptions, { escape: false })
+      );
+    }
+    return $td.html(formattedValue).attr("title", title).attr("name", name);
+  },
+  _renderHeaderCell: function (node) {
+    const $th = this._super.apply(this, arguments);
+    if (node.attrs.sticky) {
+      $th.addClass("sticky_col");
+    }
+    return $th;
+  },
   _freezeColumnWidths: function () {
     if (!this.columnWidths && this.el.offsetParent === null) {
       // there is no record nor widths to restore or the list is not visible
@@ -46,7 +175,9 @@ ListRenderer.include({
           }
         }
       });
-      const sizeColTable = JSON.parse(localStorage.getItem("sizeColTable") || "[]");
+      const sizeColTable = JSON.parse(
+        localStorage.getItem("sizeColTable") || "[]"
+      );
       const model = this.state.model;
 
       const staticColumnWidth = fieldName.reduce((acc, curValue) => {
@@ -55,22 +186,23 @@ ListRenderer.include({
         );
         if (size_col) {
           return [...acc, size_col[curValue]];
-        }
-        else if (obj[curValue]) {
+        } else if (obj[curValue]) {
           return [...acc, obj[curValue]];
         } else {
           return acc;
         }
       }, []);
 
-      const applyDefaultColumnWidth = fieldName.map((i,inx) => {
-        const r = sizeColTable.find((s) => s.model === model && s.hasOwnProperty(i))
-        if(r) {
-          return r[i]
+      const applyDefaultColumnWidth = fieldName.map((i, inx) => {
+        const r = sizeColTable.find(
+          (s) => s.model === model && s.hasOwnProperty(i)
+        );
+        if (r) {
+          return r[i];
         } else {
-          return defaultColumnWidths[inx]
+          return defaultColumnWidths[inx];
         }
-      })
+      });
       // Hàm _squeezeTable sẽ tự động điều chỉnh width
       // Ở đây trường hợp nếu có attrs width_column thì width của mỗi cột sẽ ở dưới dạng tĩnh
       if (
@@ -194,6 +326,7 @@ ListRenderer.include({
         newSizeColTable.push(d);
       }
       localStorage.setItem("sizeColTable", JSON.stringify(newSizeColTable));
+      this._calcPositionColumn()
 
       // we remove the focus to make sure that the there is no focus inside
       // the tr.  If that is the case, there is some css to darken the whole

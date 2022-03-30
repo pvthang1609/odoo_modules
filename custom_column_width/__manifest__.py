@@ -13,7 +13,8 @@
     'data': [],
     'assets': {
         'web.assets_backend': [
-            'custom_column_width/static/src/js/list_editable_renderer.js'
+            'custom_column_width/static/src/js/list_editable_renderer.js',
+            'custom_column_width/static/src/css/style.css'
         ],
         'web.assets_qweb': [],
     }
