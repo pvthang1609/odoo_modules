@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="rf_ir_attachment_iframe_view" model="ir.ui.view">
+        <field name="name">rf.ir.attachment.iframe_view</field>
+        <field name="model">ir.attachment</field>
+        <field name="arch" type="xml">
+            <iframe>
+
+            </iframe>
+        </field>
+    </record>
+
+    <record id="rf_ir_attachment_actions" model="ir.actions.act_window">
+        <field name="name">rf.ir.attachment.actions</field>
+        <field name="res_model">ir.attachment</field>
+        <field name="view_mode">iframe</field>
+        <field name="view_id" ref="rf_ir_attachment_iframe_view"/>
+    </record>
+</odoo>
