@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div t-name="tree_view.OWLTreeViewRenderer" class="o_owl_tree_view" owl="1">
+        <div class="p-4 owl-tree-view-root">
+            <div class="row owl-tree-view-wrapper">
+                <div t-att-class="props.tableFields.length > 0 ? 'col-4' : 'col-12'">
+                    <t t-foreach="state.treeViewItems" t-as="item" t-key="item.id">
+                        <TreeViewItem item="item" onClickNode="handleActionWithNode"/>
+                    </t>
+                </div>
+                <div t-if="props.tableFields.length > 0" class="col-8">
+                    <TreeViewTable tableFields="props.tableFields" data="tableRecords"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</templates>

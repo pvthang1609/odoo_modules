@@ -1,0 +1,47 @@
+.o_tree_view_item {
+    margin-left: 2rem;
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+     user-select: none;
+}
+
+.o_tree_view_child {
+    border-left: 2px solid #eee;
+}
+
+.o_tree_view_label {
+    padding: 0.5rem 1rem;
+    background-color: #F7F7F7;
+    border-radius: 0.4rem;
+    border: 1px solid #EEEEEE;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.label-selected {
+    border: 1px solid $o-community-color !important;
+}
+
+
+.o_tree_view_label:hover {
+    background-color: #EEEEEE;
+}
+
+.o_tree_view_label > .label_count {
+    font-size: 11px;
+    background-color: $o-community-color;
+    padding: 3px;
+    border-radius: 50%;
+    color: #fff;
+    float: right;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    line-height: 15px;
+    font-weight: 600;
+}

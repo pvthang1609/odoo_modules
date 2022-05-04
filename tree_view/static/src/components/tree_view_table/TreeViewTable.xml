@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="dynamic_form.TreeViewTable" owl='1'>
+        <div class="o_tree_view_table">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <t t-foreach="props.tableFields" t-as="header" t-key="header">
+                            <th scope="col"><t t-esc="header"/></th>
+                        </t>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="props.data" t-as="row" t-key="row.id">
+                        <tr>
+                            <t t-foreach="props.tableFields" t-as="cell" t-key="cell+row.id">
+                                <td><t t-esc="row[cell]"/></td>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</templates>

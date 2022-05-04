@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_category_owl_tree_view" model="ir.ui.view">
+        <field name="name">Product Categories Tree View</field>
+        <field name="model">product.category</field>
+        <field name="arch" type="xml">
+            <owl_tree_view child="child_id" parent="parent_id" display="complete_name" count="product_count">
+<!--                <treeviewtable name="product.product" relation_field="categ_id">-->
+<!--                    <field name="id"/>-->
+<!--                    <field name="name"/>-->
+<!--                </treeviewtable>-->
+            </owl_tree_view>
+        </field>
+    </record>
+
+    <record id='product.product_category_action_form' model='ir.actions.act_window'>
+        <field name="name">Product Categories</field>
+        <field name="res_model">product.category</field>
+        <field name="view_mode">tree,owl_tree_view,form</field>
+    </record>
+</odoo>

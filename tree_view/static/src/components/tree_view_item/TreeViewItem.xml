@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="dynamic_form.TreeViewItem" owl='1'>
+        <div class="o_tree_view_item">
+            <t t-if="props.item.isSelect">
+                <t t-set="class_selected">
+                    label-selected
+                </t>
+            </t>
+            <t t-else="">
+                <t t-set="class_selected"> </t>
+            </t>
+            <div t-att-class="'o_tree_view_label' + class_selected"
+                 t-on-click="props.onClickNode(props.item.index, props.item.child_id, props.item.child)">
+                <i t-if="props.item.child_id.length > 0 and !props.item.isOpen" class="fa fa-folder mr-2"/>
+                <i t-if="props.item.child_id.length > 0 and props.item.isOpen" class="fa fa-folder-open mr-2"/>
+                <span t-esc="props.item.name"/>
+                <span t-if="props.item.count >= 0" class="label_count">
+                    <t t-esc="props.item.count"/>
+                </span>
+            </div>
+            <t t-if="props.item.child.length > 0 and props.item.isOpen">
+                <div class="o_tree_view_child" t-att-data-parentid="props.item.id">
+                    <t t-foreach="props.item.child" t-as="childItem" t-key="childItem.id">
+                        <TreeViewItem item="childItem" onClickNode="props.onClickNode"/>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>
