@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_vns_technical" name="VNS-Kĩ thuật" parent="base.menu_custom" sequence="30"/>
+    <menuitem id="vns_notification_menu"
+              name="Thông báo"
+              parent="vns_notify.menu_vns_technical"
+              sequence="1"
+              action="action_vns_notification"/>
+</odoo>

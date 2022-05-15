@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_vns_notification" model="ir.actions.act_window">
+        <field name="name">Danh sách thông báo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vns.notification</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_vns_notification_tree" model="ir.ui.view">
+        <field name="name">Danh sách thông báo</field>
+        <field name="model">vns.notification</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Danh sách thông báo" editable="top">
+                <field name="name"/>
+                <field name="content"/>
+                <field name="is_read"/>
+                <field name="receiver_id"/>
+                <field name="link"/>
+                <field name="target"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_vns_notification_form" model="ir.ui.view">
+        <field name="name">Form thông báo</field>
+        <field name="model">vns.notification</field>
+        <field name="arch" type="xml">
+            <form string="Tạo mới thông báo">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="content"/>
+                        <field name="is_read"/>
+                        <field name="receiver_id"/>
+                        <field name="link"/>
+                        <field name="target"/>
+                        <field name="create_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--FILTER + GROUP BY-->
+    <record id="view_vns_notification_filter" model="ir.ui.view">
+        <field name="name">Lọc và nhóm thông báo</field>
+        <field name="model">vns.notification</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Tạo ngày hôm nay" name="today" domain="[('create_date', '&gt;', (context_today() - datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"/>
+                <filter string="Sửa ngày hôm nay" name="today" domain="[('write_date', '&gt;', (context_today() - datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"/>
+           </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="vns.Notification" owl="1">
+        <div class="dropdown" t-att-class="{'show': state.isOpen}">
+            <a class="dropdown-toggle o-no-caret o-dropdown--narrow" t-on-click="handleClickDropdownToggle">
+                <i class="fa fa-bell" role="img" aria-label="Notification"/>
+                <span class="vns_notification_counter badge badge-pill">
+                    <t t-esc="state.count"/>
+                </span>
+            </a>
+            <t t-if="state.isOpen">
+                <div class="vns_notification_dropdownMenu dropdown-menu dropdown-menu-right" role="menu">
+                    <div class="vns_notification_dropdownMenuHeader">
+                        <button type="button" role="tab" data-tab-id="unread" class="vns_notification_tabButton o-desktop btn btn-link"
+                                t-att-class="{'o-active': state.tab === 'unread'}" t-on-click="handleClickChangeTab">Chưa đọc</button>
+                        <button type="button" role="tab" data-tab-id="all" class="vns_notification_tabButton o-desktop btn btn-link"
+                                t-att-class="{'o-active': state.tab === 'all'}" t-on-click="handleClickChangeTab">Tất cả</button>
+                        <div class="o-autogrow"/>
+                        <button type="button" class="vns_notification_readAllButton btn btn-link" t-on-click="handleMarkAsReadAll">Đánh dấu tất cả đã đọc</button>
+                    </div>
+                    <div class="o_NotificationList vns_notification_notificationList">
+                        <t t-if="state.notifications.length">
+                            <t t-foreach="state.notifications" t-as="notify" t-key="notify.id">
+                                <div class="o_ThreadPreview o_NotificationList_preview vns_NotificationList_preview"
+                                     t-att-class="{'o-muted': !notify.is_read}"
+                                     t-on-click="() => handlerClickNotification(notify.link, notify.target, notify.id, notify.is_read)">
+                                    <div style="padding: 2px">
+                                        <span t-if="!notify.is_read" title="Thông báo chưa đọc"
+                                              class="o_ThreadPreview_coreItem fa fa-circle"
+                                              style="font-size: 5px; color: green"/>
+                                        <span t-if="notify.is_read" title="Thông báo đã đọc"
+                                              class="o_ThreadPreview_coreItem fa fa-circle"
+                                              style="font-size: 5px; color: transparent"/>
+                                    </div>
+                                    <div class="o_ThreadPreview_sidebar">
+                                        <div class="o_ThreadPreview_imageContainer o_ThreadPreview_sidebarItem">
+                                            <img src="vns_notify/static/description/default_bell.jpg" class="o_ThreadPreview_image rounded-circle"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_ThreadPreview_content">
+                                        <div class="o_ThreadPreview_header align-items-baseline">
+                                            <span class="o_ThreadPreview_name text-truncate" t-esc="notify.name"/>
+                                            <span t-if="notify.link" t-att-title="notify.link"
+                                              class="o_ThreadPreview_coreItem fa fa-link"
+                                              style="font-size: 11px"/>
+                                            <span class="o-autogrow"/>
+                                            <span class="o_ThreadPreview_date o-muted" t-esc="getFormNow(notify.create_date)"/>
+                                        </div>
+                                        <div class="o_ThreadPreview_core">
+                                            <span class="o_ThreadPreview_coreItem o_ThreadPreview_inlineText text-truncate"
+                                                  t-esc="notify.content" t-att-title="notify.content"/>
+                                            <t t-if="!notify.is_read">
+                                                <span class="o-autogrow"/>
+                                                <span title="Đánh dấu đã đọc"
+                                                      class="o_ThreadPreview_coreItem o_ThreadPreview_markAsRead fa fa-check"
+                                                      t-att-data-notification-id="notify.id"
+                                                      t-on-click="handleMarkAsRead"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span class="o-autogrow"/>
+                                                <span title="Xóa thông báo"
+                                                      class="o_ThreadPreview_coreItem o_ThreadPreview_markAsRead fa fa-trash"
+                                                      t-att-data-notification-id="notify.id"
+                                                      t-on-click="handleDeleteNotification"/>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <div class="dropdown-item-text text-center vns_notification_activity d-flex justify-content-center">
+                                <span>Bạn không có thông báo nào.</span>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>
