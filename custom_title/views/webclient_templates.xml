@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="login_layout_inherit" inherit_id="web.login_layout" name="Login Layout Inherit">
+   		<xpath expr="//a[@target='_blank']" position="replace">
+		    <a href="https://vnsolution.com.vn/" target="_blank">Powered by <span>VNSOLUTION</span></a>
+   		</xpath>
+   	</template>
+	<template id="layout_inherit" inherit_id="web.layout" name="Layout Inherit">
+   		<xpath expr="//link[@type='image/x-icon']" position="replace">
+		    <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/custom_title/static/src/img/favicon.png'"/>
+   		</xpath>
+		<xpath expr="//title" position="replace">
+		     <title t-esc="title or 'VNS'"/>
+   		</xpath>
+   	</template>
+</odoo>

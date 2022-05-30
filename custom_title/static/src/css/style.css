@@ -1,0 +1,9 @@
+a[href="https://www.odoo.com?utm_source=db&utm_medium=auth"] {
+    display: none !important;
+}
+
+span[data-menu="account"],
+a[data-menu="documentation"],
+a[data-menu="support"]{
+    display: none;
+}
